@@ -5,36 +5,121 @@
     <!-- Required meta tags -->
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
-    <link rel='stylesheet' href='bootstrap.css'>
     <link rel="stylesheet" href="index.css">
+    <link rel='stylesheet' href='bootstrap.css'>
     <title>Text Editor</title>
 </head>
 
 <body>
-    
-    <div class="container-fluid border" id="box">
-        <div id="navbar" class="border border-warning">
-            <div class="nav-item rounded btn btn-outline-primary mr-2" id="blog-title">Title</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="heading-big">Big header</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="heading-small">Small header</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="list">List</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="image-left">Left Img</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="image-right">Right Img</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="image-center">Middle Img</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="text">Normal Text</div>
-            <div class="nav-item rounded btn btn-outline-primary mx-2" id="update">Update Preview</div>
+    <div class="container-fluid">
+        <!-- buttons to add various divs in the blog post -->
+        <div id="navbar">
+            <button class="btn btn-outline-primary my-2 mr-2" id="bhl">Big Heading Left Aligned</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="bhc">Big Heading Centered</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="mh">Medium Heading (Left Aligned)</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="sh">Small Heading (Left Aligned)</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="np">Normal paragraph</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="plsi">Para with a small left image</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="plbi">Para with a big left image</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="prsi">Para with a small right image</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="prbi">Para with a big right image</button>
+            <button class="btn btn-outline-primary my-2 mr-2" id="fwi">Full width image</button>
         </div>
-        <div id="editor" class="border border-success">
-            <div id="text-area">
-                <textarea name="area" id="area"></textarea>
+
+        <!-- Blog Post editor starts -->
+        <div id="editor">
+
+            <!-- Mandatory blog post title input field -->
+            <div class="form-row my-3 text-center">
+                <div class="col">
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Enter Blog Post Title">
+                </div>
             </div>
-            <div id="preview"></div>
+
+            <!-- Mandatory cover image input div -->
+            <div id="coverImageDiv" class="border rounded">
+                <div class="form-group">
+                    <label for="coverImage">Upload Cover Image of This Blog Post</label>
+                    <input type="file" class="form-control-file" id="coverImage">
+                </div>
+            </div>
+
+            <div id="newElements">
+
+
+
+
+
+                <!-- Paragraph with big image to the left side -->
+                <div class="row my-3 mx-auto" style="width: 100%">
+                    <div class="col-5 border text-center veritcal-align-center" style="padding: 0;">
+                        <div class="form-group border">
+                            <label for="exampleFormControlFile1">Example file input</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </div>
+                    <div class="col-7 border" style="padding: 0;">
+                        <textarea class="norm-para form-control" rows="6"></textarea>
+                    </div>
+                </div>
+
+                
+                <!-- Paragraph with small image to the left side -->
+                <div class="row my-3 mx-auto" style="width: 100%">
+                    <div class="col-2 border text-center veritcal-align-center" style="padding: 0;">
+                        <div class="form-group border">
+                            <label for="exampleFormControlFile1">Example file input</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </div>
+                    <div class="col-10 border" style="padding: 0;">
+                        <textarea class="norm-para form-control" rows="6"></textarea>
+                    </div>
+                </div>
+
+
+                <!-- Paragraph with big image to the right side -->
+                <div class="row my-3 mx-auto" style="width: 100%">
+                    <div class="col-7 border" style="padding: 0;">
+                        <textarea class="norm-para form-control" rows="6"></textarea>
+                    </div>
+                    <div class="col-5 border text-center veritcal-align-center" style="padding: 0;">
+                        <div class="form-group border">
+                            <label for="exampleFormControlFile1">Example file input</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </div>
+                <!-- Paragraph with small image to the right side -->
+                <div class="row my-3 mx-auto" style="width: 100%">
+                    <div class="col-10 border" style="padding: 0;">
+                        <textarea class="norm-para form-control" rows="6"></textarea>
+                    </div>
+                    <div class="col-2 border text-center veritcal-align-center" style="padding: 0;">
+                        <div class="form-group border">
+                            <label for="exampleFormControlFile1">Example file input</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </div>
+                    
+                </div>
+                
+
+
+
+                <!-- Paragraph with image to the right side -->
+                
+
+
+                <!-- Normal paragraph without any image -->
+                <textarea class="norm-para form-control my-3"
+                    rows="6">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus accusantium pariatur voluptatibus commodi expedita aut exercitationem ex fugiat beatae, architecto in dicta laborum rem illum officia odio optio. Vel, sunt?</textarea>
+            </div>
+
         </div>
     </div>
     <script src='jQuery.js'></script>
     <script src='bootstrap.js'></script>
     <script src='index.js'></script>
-    
 </body>
 
-</html> 
+</html>
