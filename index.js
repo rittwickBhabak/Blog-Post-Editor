@@ -1,63 +1,241 @@
-let templates = [[],[],[],[],[],[],[],[],[],[],[],[]];
-// 00 --> Big heading (left)
-// 01 --> Big heading (mid)
-// 02 --> Medium heading (left)
-// 03 --> Small heading (left)
-// 04 --> normal paragraph
-// 05 --> paragraph with small left image
-// 06 --> paragraph with big left image
-// 07 --> paragraph with small right image
-// 08 --> paragraph with big right image
-// 09 --> Centered Big image
-// 10 --> Two image section
-// 11 --> Blog title
+let elements = [];
+// $('#preview').hide();
+// $('#show-editor').click(()=>{
+    // $("#preview").hide();
+    // $('#editor').show();
+    // $('#show-preview').parent()[0].className = "nav-item"    
+    // $('#show-editor').parent()[0].className = "nav-item active"    
+// })
 
-templates[0].push(`<div class="my-3"><h2>`);
-templates[0].push(`</h2></div>`);
+$(document).on('click', '#show-preview',function(){
+    // $("#preview").show();
+    // $('#editor').hide();
+    // $('#show-preview').parent()[0].className = "nav-item active"    
+    // $('#show-editor').parent()[0].className = "nav-item"
+    elements.forEach(function(list,index){
+        let myHtmlTemplate = ``;
+        if(list[0]==1){
+            let x = $(list[1]).val();
+            myHtmlTemplate = `${list[2]}${$(list[1]).val()}${list[3]}`
+            let pre = $('#preview').html()
+            // $('#preview').html(pre+myHtmlTemplate)
+            console.log(x);
+        }
+    })
+})
 
-templates[1].push(`<div class=" text-center my-3"><h2>`);
-templates[1].push(`</h2></div>`);
+$('#lhc').click(()=>{
+    let id = '#'+'elementNo'+elements.length;
+    let template = `
+    <!-- large-heading-center -->
+    <div class="row my-2">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <!-- <label for="elementNo${elements.length}">Large Heading (center aligned)</label> -->
+                <input type="text" class="form-control text-center" id="elementNo${elements.length}" value="nice heading" placeholder="Large Heading center aligned">
+                <small class="form-text text-muted">Large Heading (center aligned)</small>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary" id="del${elements.length}">Delete</button></div>
+    </div>`
 
-templates[2].push(`<div class=" my-3"><h3>`);
-templates[2].push(`</h3></div>`);
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
+    let part1 = `<h1 class="text-center>`
+    let part2 = `</h1>`
+    elements.push([1,id,part1,part2]);
+    
+})
+$('#lhl').click(()=>{
+    let template = `
+    <!-- large-heading-left -->
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <!-- <label for="elementNo${elements.length}">Large Heading (left aligned)</label> -->
+                <input type="text" class="form-control" id="elementNo${elements.length}" placeholder="Large Heading left aligned">
+                <small class="form-text text-muted">Large Heading (left aligned)</small>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary"  id="del${elements.length}">Delete</button></div>
+    </div>`
 
-templates[3].push(`<div class=" my-3"><h5>`);
-templates[3].push(`</h5></div>`);
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
 
-templates[4].push(`<div class=" text-justify">`);
-templates[4].push(`</div>`);
+})
+$('#nhc').click(()=>{
+    let template = `
+    <!-- Normal-heading-center -->
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <!-- <label for="elementNo${elements.length}">Normal Heading (center aligned)</label> -->
+                <input type="text" class="form-control text-center" id="elementNo${elements.length}" placeholder="Normal Heading center aligned">
+                <small class="form-text text-muted">Normal Heading (center aligned)</small>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary" id="del${elements.length}">Delete</button></div>
+    </div>`
 
-templates[5].push(`<div class="sli border my-3"><div class="row"><div class="col-3 border"><img src="`);
-templates[5].push(`" width="100%" alt=""></div><div class="col-9 border">`);
-templates[5].push(`</div></div></div>`);
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
 
-templates[6].push(`<div class="bli border my-3"><div class="row"><div class="col-5 border"><img src="`);
-templates[6].push(`" width="100%" alt=""></div><div class="col-7 border">`);
-templates[6].push(`</div></div></div>`);
+})
+$('#nhl').click(()=>{
+    let template = `
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <!-- <label for="elementNo${elements.length}">Normal Heading (left aligned)</label> -->
+                <input type="text" class="form-control" id="elementNo${elements.length}" placeholder="Normal Heading left aligned">
+                <small class="form-text text-muted">Normal Heading (left aligned)</small>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary" id="del${elements.length}">Delete</button></div>
+    </div>`
 
-templates[7].push(`<div class="sri border my-3"><div class="row"><div class="col-9 border">`);
-templates[7].push(`</div><div class="col-3 border"><img src="`);
-templates[7].push(`" width="100%" alt=""></div></div></div>`);
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
 
-templates[8].push(`<div class="bri border my-3"><div class="row"><div class="col-7 border">`);
-templates[8].push(`</div><div class="col-5 border"><img src="`);
-templates[8].push(`" width="100%" alt=""></div></div></div>`);
+})
+$('#shc').click(()=>{
+    let template = `
+    <!-- small-heading-center -->
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <!-- <label for="elementNo${elements.length}">small Heading (center aligned)</label> -->
+                <input type="text" class="form-control text-center" id="elementNo${elements.length}" placeholder="Small Heading center aligned">
+                <small class="form-text text-muted">Small Heading (center aligned)</small>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary" id="del${elements.length}">Delete</button></div>
+    </div>`
 
-templates[9].push(`<div class="container-fluid border text-center my-3"><img src="`);
-templates[9].push(`" alt="" height="500px"></div>`);
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
 
-templates[10].push(`<div class="container-fluid border text-center my-3"><div class="row"><div class="col-6 m-auto"><img src="`);
-templates[10].push(`" alt="" width="100%"></div><div class="col-6 m-auto"><img src="`);
-templates[10].push(`" alt="" width="100%"></div></div></div>`);
+})
+$('#shl').click(()=>{
+    let template = `
+    <!-- small-heading-left -->
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <!-- <label for="elementNo${elements.length}">small Heading (left aligned)</label> -->
+                <input type="text" class="form-control" id="elementNo${elements.length}" placeholder="small Heading left aligned">
+                <small class="form-text text-muted">Small Heading (left aligned)</small>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary" id="del${elements.length}">Delete</button></div>
+    </div>`
 
-templates[11].push(`<div class="my-3 text-center"><div class="col"><h1 class="text-center">`)
-templates[11].push(`</h1></div></div>`);
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
 
-//HTML for demo STARTS, div with id test
-// let myDiv = document.createElement('div');
-// myDiv.id='test'
-// // myDiv.style = 'width:100%;height:300px;border:1px solid black;text-align:center;margin:10px auto'
-// myDiv.className = "container-fluid"
-// myDiv.innerHTML = templates[10][0] + 'main.png' + templates[10][1] + 'main.png' + templates[10][2];
-// document.getElementsByTagName('body')[0].appendChild(myDiv)
-//HTML for demo ends
+})
+$('#sp').click(()=>{
+    let template = `
+    <!-- simple-paragraph -->
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <!-- <label for="elementNo${elements.length}">Example textarea</label> -->
+                <textarea class="form-control" id="elementNo${elements.length}" rows="3"></textarea>
+                <small class="form-text text-muted">Simple paragraph </small>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary" id="del${elements.length}">Delete</button></div>
+    </div>
+    `
+
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
+
+})
+$('#link').click(()=>{
+    let template = `
+    <!-- links -->
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="Link text">
+                    <small class="form-text text-muted">Link text</small>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="Link address">
+                    <small class="form-text text-muted">Link address</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary" id="del${elements.length}">Delete</button></div>
+    </div>
+    `
+
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
+
+})
+$('#img-50-50').click(()=>{
+    let template = `
+    <!-- 50-50 image -->
+    <div class="row my-2">
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-6 border">
+                    <div class="form-group">
+                        <label for="">Left image</label>
+                        <input type="file" class="form-control-file" id="">
+                    </div>
+                </div>
+                <div class="col-sm-6 border">
+                    <div class="form-group">
+                        <label for="">Right image</label>
+                        <input type="file" class="form-control-file" id="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary">Delete</button></div>
+    </div>
+    `
+
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
+
+})
+$('#img-100').click(()=>{
+    let template = `
+    <!-- 100% image -->
+    <div class="row my-2">
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-12 mb-2 border text-center">
+                    <div class="form-group">
+                        <label for="">Middle image | width 100%</label>
+                        <input type="file" class="form-control-file" id="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"><button class="btn btn-primary">Delete</button></div>
+    </div>
+    `
+
+    let pre = $('#addHere').html();
+    $('#addHere').html(pre+template);
+    // at end 
+
+})
+
