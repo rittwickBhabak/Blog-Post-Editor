@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bch{
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 40px;
+}
+
+.blh{
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 40px;
+}
+
+.sch{
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.slh{
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.cp{
+    text-align: justify;
+    white-space: pre-wrap;
+    font-size: 25px;
+}
+
+
+.fci{
+    max-width: 600px;
+    display: block;
+    margin: auto;
+}
+.link-text, .link-url{
+    width:42%;
+    height: 30px;
+    padding-left: 10px;
+}
+.para{
+    width: 40%;
+    resize: none;
+    height: 200px;
+    padding: 10px;
+    white-space: pre-wrap;
+    font-size: 20px;
+    font-family: serif;
+}
+
+.image-and-para{
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.li{
+    width: 30%;
+    clear: both;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.ri{
+    width: 30%;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: right;
+    
+}
+.rilp{
+    margin-top: 10px;
+}
+.lp{
+    float: left;
+    width: 65%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: justify;
+    white-space: pre-wrap;
+    font-size: 25px;
+    font-family: serif;
+}
+p{
+    white-space: pre-wrap;
+    font-size: 25px;
+}
+textarea{
+    padding: 10px;
+}

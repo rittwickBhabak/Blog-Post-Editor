@@ -1,4 +1,193 @@
-body{
-    /* min-width: 1000px; */
-    /* background-color: greenyellow; */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#header{
+}
+#nav-item-list{
+    display: flex;
+    padding: 10px;
+    list-style-type: none;
+    border-bottom: 1px solid blueviolet;
+    margin-bottom: 10px;
+}
+.nav-item{
+    margin-left: 30px;
+}
+.nav-item button{
+    background-color: blueviolet;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+}
+#selector{
+    padding-left: 10px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+}
+.selector-btn{
+    background-color: rgb(106, 21, 185);
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+#edit-area{
+    height: 1000px;
+    background-color: whitesmoke;
+}
+#preview-html{
+    width: 100%;
+    height: 100vh;
+    font-size: larger;
+    font-family: serif;
+}
+#preview-blog{
+    padding: 20px;
+}
+.side-btn{
+    width:5%;
+    height: 30px;
+    display: inline-block;
+    /* background-color: red; */
+}
+.bch{
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 40px;
+}
+.bch-editor{
+    height: 40px;
+    text-align: center;
+    width: 85%;
+    font-weight: bolder;
+    font-size: 30px;
+}
+.blh{
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 40px;
+}
+.blh-editor{
+    height: 40px;
+    text-align: left;
+    width: 85%;
+    font-weight: bolder;
+    font-size: 30px;
+}
+.sch{
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.sch-editor{
+    height: 30px;
+    text-align: center;
+    width: 85%;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.slh{
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.slh-editor{
+    height: 30px;
+    text-align: left;
+    width: 85%;
+    font-weight: bolder;
+    font-size: 20px;
+}
+.cp-editor{
+    height: auto;
+    min-height: 50px;
+    width: 85%;
+    resize: vertical;
+    font-size: larger;
+    font-family: serif;
+}
+.cp{
+    text-align: justify;
+    white-space: pre-wrap;
+    font-size: 25px;
+}
+.fci-editor{
+    width: 85%;
+    height: 30px;
+}
+
+.fci{
+    max-width: 600px;
+    display: block;
+    margin: auto;
+}
+.link-text, .link-url{
+    width:42%;
+    height: 30px;
+    padding-left: 10px;
+}
+.para{
+    width: 40%;
+    resize: none;
+    height: 200px;
+    padding: 10px;
+    white-space: pre-wrap;
+    font-size: 20px;
+    font-family: serif;
+}
+.image-input{
+    height: 200px;
+    width: 40%;
+    padding: 20px;
+    resize: none;
+}
+.image-and-para{
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.li{
+    width: 30%;
+    clear: both;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.ri{
+    width: 30%;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: right;
+    
+}
+.rilp{
+    margin-top: 10px;
+}
+.lp{
+    float: left;
+    width: 65%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: justify;
+    white-space: pre-wrap;
+    font-size: 25px;
+    font-family: serif;
+}
+p{
+    white-space: pre-wrap;
+    font-size: 25px;
+}
+textarea{
+    padding: 10px;
 }

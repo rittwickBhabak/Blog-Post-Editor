@@ -1,893 +1,295 @@
-let elements = [];
-$('#preview').hide();
-$('#show-editor').click(()=>{
-    $("#preview").hide();
-    $('#editor').show();
-    $('#show-preview').parent()[0].className = "nav-item"    
-    $('#show-editor').parent()[0].className = "nav-item active"    
-})
+// Various blocks
+let header = document.getElementById('header');
+let navbar = document.getElementById('navbar')
+let selector = document.getElementById('selector');
+let editArea = document.getElementById('edit-area');
+let previewHtml = document.getElementById('preview-html');
+let previewBlog = document.getElementById('preview-blog');
 
-$('#show-preview').click(function(){
-    $("#preview").show();
-    $('#editor').hide();
-    $('#show-preview').parent()[0].className = "nav-item active"    
-    $('#show-editor').parent()[0].className = "nav-item"
-    let x = ''
-    $('#preview').html('')
-    console.log(elements)
-    elements.forEach(function(list, index){
-            if(list!=''){
-            let existingHtml = document.getElementById('preview').innerHTML;
-            console.log(list[0]);
-            if(list[0]=='large-heading-center'){
-                let largeHeadingCenter = document.createElement('h1');
-                largeHeadingCenter.setAttribute('class','text-center');
-                largeHeadingCenter.textContent = list[1];
-                document.getElementById('preview').appendChild(largeHeadingCenter);
-            }
-            if(list[0]=='normal-heading-center'){
-                let largeHeadingCenter = document.createElement('h3');
-                largeHeadingCenter.setAttribute('class','text-center');
-                largeHeadingCenter.textContent = list[1];
-                document.getElementById('preview').appendChild(largeHeadingCenter);
-            }
-            if(list[0]=='small-heading-center'){
-                let largeHeadingCenter = document.createElement('h5');
-                largeHeadingCenter.setAttribute('class','text-center');
-                largeHeadingCenter.textContent = list[1];
-                document.getElementById('preview').appendChild(largeHeadingCenter);
-            }
-            if(list[0]=='small-heading-left'){
-                let largeHeadingCenter = document.createElement('h5');
-                largeHeadingCenter.textContent = list[1];
-                document.getElementById('preview').appendChild(largeHeadingCenter);
-            }
-            if(list[0]=='normal-heading-left'){
-                let largeHeadingCenter = document.createElement('h3');
-                largeHeadingCenter.textContent = list[1];
-                document.getElementById('preview').appendChild(largeHeadingCenter);
-            }
-            if(list[0]=='large-heading-left'){
-                let largeHeadingCenter = document.createElement('h1');
-                largeHeadingCenter.textContent = list[1];
-                document.getElementById('preview').appendChild(largeHeadingCenter);
-            }
-            if(list[0]=='simple-paragraph'){
-                let simpleParagraph = document.createElement('p');
-                simpleParagraph.textContent = list[1];
-                document.getElementById('preview').appendChild(simpleParagraph);
-            }
-            if(list[0]=='link-text'){
-                let link = document.createElement('a');
-                link.setAttribute('href', elements[index+1][1]);
-                link.textContent = list[1];
-                document.getElementById('preview').appendChild(link);
-            }
-            if(list[0]=='img-50-50-1'){
-                let img5050 = document.createElement('div');
-                img5050.setAttribute('class','row my-2');
-                let div1 = document.createElement('div');
-                let div2 = document.createElement('div');
-                div1.className = "col-sm-6 mx-auto"
-                div2.className = "col-sm-6 mx-auto"
-                let img1 = document.createElement('img');
-                let img2 = document.createElement('img');
-                img1.src = list[1];
-                img2.src = elements[index+1][1];
-                img1.id = 'img' + parseInt(list[list.length-1]);
-                img2.id = 'img' + parseInt(elements[index+1][list.length-1]);
-                img1.setAttribute('width','100%');
-                img2.setAttribute('width','100%');
-                div1.appendChild(img1)
-                div2.appendChild(img2);
-                img5050.appendChild(div1);
-                img5050.appendChild(div2);
-                // <div class="row my-2">
-                //     <div class="col-sm-6 mx-auto"><img src="main.png" width="100%" alt=""></div>
-                //     <div class="col-sm-6 mx-auto"><img src="main.png" width="100%" alt=""></div>
-                // </div>
-                document.getElementById('preview').appendChild(img5050);
-            }
-            if(list[0]=='img-100'){
-                // <div class="row my-2">
-                //     <div class="col-sm-10 mx-auto">
-                //         <img src="main.png" width="100%" alt="">
-                //     </div>
-                // </div>
-                let img100 = document.createElement('div');
-                img100.className = "row my-2";
-                let innerDiv = document.createElement('div');
-                innerDiv.className = "col-sm-10 mx-auto";
-                let img = document.createElement('img');
-                img.setAttribute('width','100%');
-                img.id = 'img' + list[list.length-1];
-                img.src = list[1];
-                innerDiv.appendChild(img);
-                img100.appendChild(innerDiv);
-                document.getElementById('preview').appendChild(img100);
-            }
-            if(list[0]=='img-50-left-img'){
-                console.log('from img:',list[list.length-1])
-                console.log('form img(next item):', elements[index+1])
-                // div .row .my-4
-                //      div .col-sm-6
-                //          img width=100% src=""
-                //      div .col-sm-6
-                let wrapper = document.createElement('div');
-                wrapper.className = "row my-4";
-                let imgDiv = document.createElement('div');
-                imgDiv.className = 'col-sm-6';
-                let img = document.createElement('img');
-                img.setAttribute('width', '100%');
-                img.src = list[1];
-                let textDiv = document.createElement('div');
-                textDiv.className = "col-sm-6";
-                // textDiv.textContent = elements[index+1][list.length-1];
-                textDiv.textContent = elements[index+1][1];
-                imgDiv.appendChild(img);
-                wrapper.appendChild(imgDiv);
-                wrapper.appendChild(textDiv);
-                document.getElementById('preview').appendChild(wrapper);
+//Selector Buttons
+let bch = document.getElementById('big-center-heading');
+let blh = document.getElementById('big-left-heading');
+let slh = document.getElementById('small-left-heading');
+let sch = document.getElementById('small-center-heading');
+let fci = document.getElementById('full-centered-image');
+let cp = document.getElementById('complete-para');
+let lpri = document.getElementById('left-para-right-image');
+let lirp = document.getElementById('left-image-right-para');
+let link = document.getElementById('link');
+// Navbar button functionality
+function showEditor(){
+    editArea.style.display = "block";
+    previewHtml.style.display = "none";
+    previewBlog.style.display = "none";
+    selector.style.display = "block";
+}
 
-            }
-            if(list[0]=='img-25-left-img'){
-                console.log('from img:',list[list.length-1])
-                console.log('form img(next item):', elements[index+1])
-                // div .row .my-4
-                //      div .col-sm-6
-                //          img width=100% src=""
-                //      div .col-sm-6
-                let wrapper = document.createElement('div');
-                wrapper.className = "row my-4";
-                let imgDiv = document.createElement('div');
-                imgDiv.className = 'col-sm-3';
-                let img = document.createElement('img');
-                img.setAttribute('width', '100%');
-                img.src = list[1];
-                let textDiv = document.createElement('div');
-                textDiv.className = "col-sm-9 text-justify";
-                // textDiv.textContent = elements[index+1][list.length-1];
-                textDiv.textContent = elements[index+1][1];
-                imgDiv.appendChild(img);
-                wrapper.appendChild(imgDiv);
-                wrapper.appendChild(textDiv);
-                document.getElementById('preview').appendChild(wrapper);
+function showHtml(){
+    editArea.style.display = "none";
+    previewHtml.style.display = "block";
+    previewBlog.style.display = "none";
+    selector.style.display = "none";
+    blogHtml = `<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Blog</title>
+                    <link rel="stylesheet" href="blog.css">
+                </head>
+                <body>
+                    <div id="blog">`;
+    for(let obj in objs){
+        blogHtml += objs[obj].generatedHtml()
+    }
+    blogHtml += ` </div>
+                </body>
+                </html>`
+    previewHtml.value = blogHtml;
+}
 
-            }
-            if(list[0]=='img-vs-left-img'){
-                console.log('from img:',list[list.length-1])
-                console.log('form img(next item):', elements[index+1])
-                // div .row .my-4
-                //      div .col-sm-6
-                //          img width=100% src=""
-                //      div .col-sm-6
-                let wrapper = document.createElement('div');
-                wrapper.className = "row my-4";
-                let imgDiv = document.createElement('div');
-                imgDiv.className = 'col-sm-2';
-                let img = document.createElement('img');
-                img.setAttribute('width', '100%');
-                img.src = list[1];
-                let textDiv = document.createElement('div');
-                textDiv.className = "col-sm-10 text-justify";
-                // textDiv.textContent = elements[index+1][list.length-1];
-                textDiv.textContent = elements[index+1][1];
-                imgDiv.appendChild(img);
-                wrapper.appendChild(imgDiv);
-                wrapper.appendChild(textDiv);
-                document.getElementById('preview').appendChild(wrapper);
+function showBlog(){
+    editArea.style.display = "none";
+    previewHtml.style.display = "none";
+    previewBlog.style.display = "block";
+    selector.style.display = "none";
+    blogHtml = '';
+    for(let obj in objs){
+        blogHtml += objs[obj].generatedHtml()
+    }
+    previewBlog.innerHTML = blogHtml;
+}
+function saveBlog(){
+    window.localStorage.setItem('blog-post', JSON.stringify(objs));
+}
+function loadBlog(){
+    let rawText = window.localStorage.getItem('blog-post');
+    objs = [];
+    console.log(objs);
+    for(let obj of JSON.parse(rawText)){
+        console.log(obj)
+        console.log(obj.type);
+        console.log(obj.values);
+        const new_obj = new Templates(obj.type, objs.length, [obj.values[0], obj.values[1]]);
+        new_obj.setValues([obj.values[0], obj.values[1]]);
+        objs.push(new_obj);
+    }
+   
+    updateEditor();    
+}
+//Update the editor as soon as a new element is added
 
-            }
-            if(list[0]=='img-50-right-img'){
-                console.log('from img:',list[list.length-1])
-                console.log('form img(next item):', elements[index+1])
-                // div .row .my-4
-                //      div .col-sm-6
-                //          img width=100% src=""
-                //      div .col-sm-6
-                let wrapper = document.createElement('div');
-                wrapper.className = "row my-4";
-                let imgDiv = document.createElement('div');
-                imgDiv.className = 'col-sm-6';
-                let img = document.createElement('img');
-                img.setAttribute('width', '100%');
-                img.src = list[1];
-                let textDiv = document.createElement('div');
-                textDiv.className = "col-sm-6";
-                // textDiv.textContent = elements[index+1][list.length-1];
-                textDiv.textContent = elements[index+1][1];
-                imgDiv.appendChild(img);
-                wrapper.appendChild(textDiv);
-                wrapper.appendChild(imgDiv);
-                document.getElementById('preview').appendChild(wrapper);
-
-            }
-            if(list[0]=='img-25-right-img'){
-                console.log('from img:',list[list.length-1])
-                console.log('form img(next item):', elements[index+1])
-                // div .row .my-4
-                //      div .col-sm-6
-                //          img width=100% src=""
-                //      div .col-sm-6
-                let wrapper = document.createElement('div');
-                wrapper.className = "row my-4";
-                let imgDiv = document.createElement('div');
-                imgDiv.className = 'col-sm-3';
-                let img = document.createElement('img');
-                img.setAttribute('width', '100%');
-                img.src = list[1];
-                let textDiv = document.createElement('div');
-                textDiv.className = "col-sm-9 text-justify";
-                // textDiv.textContent = elements[index+1][list.length-1];
-                textDiv.textContent = elements[index+1][1];
-                imgDiv.appendChild(img);
-                wrapper.appendChild(textDiv);
-                wrapper.appendChild(imgDiv);
-                document.getElementById('preview').appendChild(wrapper);
-
-            }
-            if(list[0]=='img-vs-right-img'){
-                console.log('from img:',list[list.length-1])
-                console.log('form img(next item):', elements[index+1])
-                // div .row .my-4
-                //      div .col-sm-6
-                //          img width=100% src=""
-                //      div .col-sm-6
-                let wrapper = document.createElement('div');
-                wrapper.className = "row my-4";
-                let imgDiv = document.createElement('div');
-                imgDiv.className = 'col-sm-2';
-                let img = document.createElement('img');
-                img.setAttribute('width', '100%');
-                img.src = list[1];
-                let textDiv = document.createElement('div');
-                textDiv.className = "col-sm-10 text-justify";
-                // textDiv.textContent = elements[index+1][list.length-1];
-                textDiv.textContent = elements[index+1][1];
-                imgDiv.appendChild(img);
-                wrapper.appendChild(textDiv);
-                wrapper.appendChild(imgDiv);
-                document.getElementById('preview').appendChild(wrapper);
-
-            }
+//-----Class--------
+class Templates{
+    skeletons = {
+        bch: {
+            no_of_values: 1,
+            template: `<h1 class="bch">{}</h1>`,
+            editor: `<div id="elem{}"><input type="text" class="bch-editor" onchange="update(this, 0)" value="{}" placeholder="Big Centered Heading"><button class="side-btn" onclick="up(this)" id="up{}">Up</button><button class="side-btn" onclick="down(this)" id="down{}">Down</button><button class="side-btn" onclick="del(this)" id="del{}">Del</button></div>`
+        },
+        blh: {
+            no_of_values: 1,
+            template: `<h1 class="blh">{}</h1>`,
+            editor: `<div id="elem{}"><input type="text" class="blh-editor" onchange="update(this, 0)" value="{}" placeholder="Big Left Heading"><button class="side-btn" onclick="up(this)" id="up{}">Up</button><button class="side-btn" onclick="down(this)" id="down{}">Down</button><button class="side-btn" onclick="del(this)" id="del{}">Del</button></div>`
+        },
+        sch: {
+            no_of_values: 1,
+            template: `<h2 class="sch">{}</h2>`,
+            editor: `<div id="elem{}"><input type="text" class="sch-editor" onchange="update(this, 0)" value="{}" placeholder="Small Centered Heading"><button class="side-btn" onclick="up(this)" id="up{}">Up</button><button class="side-btn" onclick="down(this)" id="down{}">Down</button><button class="side-btn" onclick="del(this)" id="del{}">Del</button></div>`
+        },
+        slh: {
+            no_of_values: 1,
+            template: `<h2 class="slh">{}</h2>`,
+            editor: `<div id="elem{}"><input type="text" class="slh-editor" onchange="update(this, 0)" value="{}" placeholder="Small Left Heading"><button class="side-btn" onclick="up(this)" id="up{}">Up</button><button class="side-btn" onclick="down(this)" id="down{}">Down</button><button class="side-btn" onclick="del(this)" id="del{}">Del</button></div>`
+        },
+        cp: {
+            no_of_values: 1,
+            template: `<p class="cp">{}</p>`,
+            editor: `<div id="elem{}"><textarea type="text" class="cp-editor" onkeyup="textAreaAdjust(this)" onchange="update(this, 0)" placeholder="Paragraph">{}</textarea><button class="side-btn" onclick="up(this)" id="up{}">Up</button><button class="side-btn" onclick="down(this)" id="down{}">Down</button><button class="side-btn" onclick="del(this)" id="del{}">Del</button></div>`
+        },
+        fci: {
+            no_of_values: 1,
+            template: `<img src="{}"  alt="Image not uploaded" class="fci">`,
+            editor: `<div id="elem{}"><input type="text" class="fci-editor" onchange="update(this, 0)" value="{}" placeholder="Centered Large image"><button class="side-btn" onclick="up(this)" id="up{}">Up</button><button class="side-btn" onclick="down(this)" id="down{}">Down</button><button class="side-btn" onclick="del(this)" id="del{}">Del</button></div>`
+        },
+        lpri: {
+            no_of_values: 2,
+            template: `<div class="rilp">
+                            <p class="lp">{}</p>
+                            <img src="{}" alt="Image Not uploaded" class="ri">
+                        </div>`,
+            editor: `<div id="elem{}" class="imgae-and-para">
+                        <textarea class="para" onchange="update(this, 0)" onkeyup="textAreaAdjust(this)"  placeholder="Paragraph">{}</textarea>
+                        <textarea type="text" class="image-input" onchange="update(this, 1)" placeholder="Image URL">{}</textarea>
+                        <button class="side-btn" onclick="up(this)" id="up{}">Up</button>
+                        <button class="side-btn" onclick="down(this)" id="down{}">Down</button>
+                        <button class="side-btn" onclick="del(this)" id="del{}">Del</button>
+                    </div>`
+        },
+        lirp: {
+            no_of_values: 2,
+            template: `<div class="lirp">
+                        <img src="{}" alt="Image Not uploaded" class="li">
+                        <p>{}</p>
+                    </div>`,
+            editor: `<div id="elem{}" class="imgae-and-para">
+                        <textarea type="text" class="image-input" onchange="update(this, 0)" placeholder="Image URL">{}</textarea>
+                        <textarea class="para" onkeyup="textAreaAdjust(this)"  onchange="update(this, 1)" placeholder="Paragraph">{}</textarea>
+                        <button class="side-btn" onclick="up(this)" id="up{}">Up</button>
+                        <button class="side-btn" onclick="down(this)" id="down{}">Down</button>
+                        <button class="side-btn" onclick="del(this)" id="del{}">Del</button>
+                    </div>`
+        },
+        link: {
+            no_of_values: 2,
+            template: `<a href="{}" target="_blank">{}</a>`,
+            editor: `<div id="elem{}"><input type="text" class="link-text" value="{}" onchange="update(this, 0)" placeholder="Link URL"><input class="link-url" value="{}" onchange="update(this, 1)" type="text" placeholder="Link Text"><button class="side-btn" onclick="up(this)" id="up{}">Up</button><button class="side-btn" onclick="down(this)" id="down{}">Down</button><button class="side-btn" onclick="del(this)" id="del{}">Del</button></div>`
         }
-    })
-})
+    }
 
-$(document).on('keyup','.store-values', function(event){
-    let elementValue = event.target.value;
-    let elementId = event.target.id.slice(9);
-    elements.forEach(function(list){
-        if(list[list.length-1]==elementId){
-            if(list[0]=='large-heading-center'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='large-heading-left'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='simple-paragraph'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='link-text'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='link-href'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='img-50-left-text'){
-                list[1] = elementValue;
-                console.log(list[1]); 
-            }
-            if(list[0]=='img-25-left-text'){
-                list[1] = elementValue;
-                console.log(list[1]); 
-            }
-            if(list[0]=='img-vs-left-text'){
-                list[1] = elementValue;
-                console.log(list[1]); 
-            }
-            if(list[0]=='img-vs-right-text'){
-                list[1] = elementValue;
-                console.log(list[1]); 
-            }
-            if(list[0]=='img-50-right-text'){
-                list[1] = elementValue;
-                console.log(list[1]); 
-            }
-            if(list[0]=='img-25-right-text'){
-                list[1] = elementValue;
-                console.log(list[1]); 
-            }
-            if(list[0]=='normal-heading-center'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='normal-heading-left'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='small-heading-center'){
-                list[1] = elementValue;
-            }
-            if(list[0]=='small-heading-left'){
-                list[1] = elementValue;
-            }
+
+    constructor(type, id){
+        this.type = type;
+        this.id = id;
+        this.editor = this.skeletons[type].editor;
+        this.template = this.skeletons[type].template;
+        this.values = ['',''];
+    }
+    refresh(id){
+        this.id = id;
+        this.setValues(this.values);
+    }
+    generatedHtml(){
+        // return this.skeletons[this.type].template.format(...args);
+        console.log(this.skeletons[this.type].template.format(...this.values));
+        return this.skeletons[this.type].template.format(...this.values);
+    }
+    getEditorHtml(){
+        if(this.no_of_values==1){
+            return this.skeletons[this.type].editor.format(...[this.id, this.values[0], this.id, this.id, this.id]);
         }
-    })
-    
-})
-$(document).on('click', '.deleteElement', function(event){
-    $('#'+event.target.id).parent().parent().remove();
-    let id = parseInt(event.target.id.slice(3));
-    elements.forEach(function(list, index){
-        if(list[list.length-1]==id){
-            if(list[0]=='large-heading-center'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,1);
-            }
-            else if(list[0]=='large-heading-left'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,1);
-            }
-            else if(list[0]=='simple-paragraph'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,1);
-            }
-            else if(list[0]=='link-text'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='img-50-50-1'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='img-100'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,1);
-            }
-            else if(list[0]=='img-50-left-img'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='img-25-left-img'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='img-vs-left-img'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='img-vs-right-img'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='img-50-right-img'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='img-25-right-img'){
-                console.log('Deleting ',elements[index]);
-                elements.splice(index,2);
-            }
-            else if(list[0]=='normal-heading-center'){
-                elements.splice(index,1);
-            }
-            else if(list[0]=='normal-heading-left'){
-                elements.splice(index,1);
-            }
-            else if(list[0]=='small-heading-center'){
-                elements.splice(index,1);
-            }
-            else if(list[0]=='small-heading-left'){
-                elements.splice(index,1);
-            }
-            else{
-                console.log('not found')
-            }
+        return this.skeletons[this.type].editor.format(...[this.id, this.values[0], this.values[1], this.id, this.id, this.id]);
+    }
+    setValues(values){
+        this.values = values;
+        if(this.no_of_values==1){
+            this.skeletons[this.type].editor.format(...[this.id, this.values[0], this.id, this.id, this.id]);
+        }else{
+            this.skeletons[this.type].editor.format(...[this.id, this.values[0], this.values[1], this.id, this.id, this.id]);
         }
-    })  
-})
-
-// Headings
-$('#lhc').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- large-heading-center -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="form-group">
-                <!-- <label for="elementNo${elements.length}">Large Heading (center aligned)</label> -->
-                <input type="text" class="form-control text-center store-values" id="elementNo${elements.length}" placeholder="Large Heading center aligned">
-                <small class="form-text text-muted">Large Heading (center aligned)</small>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" role="button" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    
-    elements.push(['large-heading-center', '', id]);
-    
-})
-
-$('#nhl').click(()=>{
-    let id = elements.length;
-    let template = `
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="form-group">
-                <!-- <label for="elementNo${elements.length}">Normal Heading (left aligned)</label> -->
-                <input type="text" class="form-control store-values" id="elementNo${elements.length}" placeholder="Normal Heading left aligned">
-                <small class="form-text text-muted">Normal Heading (left aligned)</small>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    // at end 
-    elements.push(['normal-heading-left','', id]);
-
-})
-
-$('#lhl').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- large-heading-left -->
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="form-group">
-                <!-- <label for="elementNo${elements.length}">Large Heading (left aligned)</label> -->
-                <input type="text" class="form-control store-values" id="elementNo${elements.length}" placeholder="Large Heading left aligned">
-                <small class="form-text text-muted">Large Heading (left aligned)</small>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement"  id="del${elements.length}">Delete</button></div>
-    </div>`
-    
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    
-    // at end 
-    elements.push(['large-heading-left','', id]);
-})
-
-$('#nhc').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- Normal-heading-center -->
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="form-group">
-                <!-- <label for="elementNo${elements.length}">Normal Heading (center aligned)</label> -->
-                <input type="text" class="form-control text-center store-values" id="elementNo${elements.length}" placeholder="Normal Heading center aligned">
-                <small class="form-text text-muted">Normal Heading (center aligned)</small>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    // at end 
-    elements.push(['normal-heading-center','', id]);
-})
-
-$('#shc').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- small-heading-center -->
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="form-group">
-                <!-- <label for="elementNo${elements.length}">small Heading (center aligned)</label> -->
-                <input type="text" class="form-control text-center store-values" id="elementNo${elements.length}" placeholder="Small Heading center aligned">
-                <small class="form-text text-muted">Small Heading (center aligned)</small>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    // at end 
-    elements.push(['small-heading-center','', id]);
-
-})
-
-$('#shl').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- small-heading-left -->
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="form-group">
-                <!-- <label for="elementNo${elements.length}">small Heading (left aligned)</label> -->
-                <input type="text" class="form-control store-values" id="elementNo${elements.length}" placeholder="small Heading left aligned">
-                <small class="form-text text-muted">Small Heading (left aligned)</small>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    // at end 
-    elements.push(['small-heading-left','', id]);
-
-})
-
-// Simple paragraphs
-$('#sp').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- simple-paragraph -->
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="form-group">
-                <!-- <label for="elementNo${elements.length}">Example textarea</label> -->
-                <textarea class="form-control store-values" id="elementNo${elements.length}" rows="3"></textarea>
-                <small class="form-text text-muted">Simple paragraph </small>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>
-    `
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    // at end 
-    elements.push(['simple-paragraph', '' ,id]);
-
-})
-
-// Links
-$('#link').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- links -->
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="form-row">
-                <div class="col-md-4">
-                    <input type="text" class="form-control store-values" id="elementNo${elements.length}" placeholder="Link text">
-                    <small class="form-text text-muted">Link text</small>
-                </div>
-                <div class="col-md-8">
-                    <input type="text" class="form-control store-values" id="elementNo${elements.length+1}" placeholder="Link address">
-                    <small class="form-text text-muted">Link address</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>
-    `
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    // at end 
-    
-    elements.push(['link-text','',id]);
-    elements.push(['link-href', '', id+1]);
-
-}) 
-
-// Display image to preview
-function readURL(input, id){
-    if(input.files && input.files[0]){
-        var reader = new FileReader();
-        reader.onload = function(e){
-            elements[id] = e.target.result;
-            $('#'+id).attr('src',e.target.result);
-            console.log(id);
-            elements.forEach(function(list,index){
-                if(id.substring(3,)==list[list.length-1]){
-                    elements[index][1] = e.target.result;
-                    console.log(list[list.length-1]);
-                }
-            })
-        }
-        reader.readAsDataURL(input.files[0]);
+    }
+    getValues(){
+        return this.values;
     }
 }
 
-// Calls readURl when an image is uploaded
-$(document).on('change','.imgInp',function(event){
-        readURL(this, 'img'+event.target.id.substring(9,));
-})
+let objs = [];
+let counter = 0;
+let html = '';
+let blogHtml = '';
+function updateEditor(){
+    html = '';
+    blogHtml = '';
+    for(let obj in objs){
+        html += objs[obj].getEditorHtml();
+    }
+    editArea.innerHTML = html;
+    let textareas = document.getElementsByTagName('textarea');
+    for(let textarea of textareas){
+        textAreaAdjust(textarea);
+    }
+}
 
-// Two Image width 50% - 50% 
-$('#img-50-50').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- 50-50 image -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-6 border">
-                    <div class="form-group">
-                        <label for="">Left image</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-                <div class="col-sm-6 border">
-                    <div class="form-group">
-                        <label for="">Right image</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length+1}">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>
-    `
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
+function del(element){
+    let id = parseInt(element.parentNode.id.slice(4));
+    console.log('before', objs);
+    console.log('del', id);
+    console.log('after', objs);
+    for(let obj in objs){
+        if(obj>id){
+            
+            objs[obj].refresh(obj-1);
+        }
+    }
+    objs.splice(id, 1);
+    updateEditor();
+}
+function up(element){
+    let id = parseInt(element.parentNode.id.slice(4));
+    if(id!=0){
+        objs[id].refresh(id-1);
+        objs[id-1].refresh(id);
+        let temp = objs[id];
+        objs[id] = objs[id-1];
+        objs[id-1] = temp;
+    }
+    updateEditor();
+}
+function down(element){
+    let id = parseInt(element.parentNode.id.slice(4));
+    if(id!=objs.length-1){
+        objs[id].refresh(id+1);
+        objs[id+1].refresh(id);
+        let temp = objs[id];
+        objs[id] = objs[id+1];
+        objs[id+1] = temp;
+    }
+    updateEditor();
+}
 
-    //at end
-    elements.push(['img-50-50-1','' , id]);
-    elements.push(['img-50-50-2','' , id+1]);
-
-})
-
-// Main big image
-$('#img-100').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- 100% image -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-12 mb-2 border text-center">
-                    <div class="form-group">
-                        <label for="">Middle image | width 100%</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>
-    `
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-    // at end 
-    elements.push(['img-100','',id])
+function update(element, pos){
+    let id = element.parentNode.id.slice(4);
+    let previousValues = objs[id].getValues();
+    let newValue = element.value;
+    previousValues[pos] = newValue;
     
+}
+
+bch.addEventListener('click', ()=>{
+    objs.push(new Templates('bch', objs.length, ['']));
+    updateEditor();
 })
-
-// Image placed on left (50%) with paragraph placed on right
-$('#img-50-l').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- 50% image left -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-6  border text-center">
-                    <div class="form-group">
-                        <label for="">Left Large image | width 50%</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-                <div class="col-sm-6 border">
-                    <div class="form-group">
-                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                        <textarea class="form-control store-values" id="elementNo${elements.length+1}" rows="3"></textarea>
-                        <small class="form-text text-muted">Simple paragraph </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-
-    //in the end
-    elements.push(['img-50-left-img','',id]);
-    elements.push(['img-50-left-text', '', id+1]);
-    // console.log(elements);
-});
-
-
-// Image placed on left (25%) with paragraph placed on right
-$('#img-25-l').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- 50% image left -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-3  border text-center">
-                    <div class="form-group">
-                        <label for="">Left Large image | width 50%</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-                <div class="col-sm-9 border">
-                    <div class="form-group">
-                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                        <textarea class="form-control store-values" id="elementNo${elements.length+1}" rows="3"></textarea>
-                        <small class="form-text text-muted">Simple paragraph </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-
-    //in the end
-    elements.push(['img-25-left-img','',id]);
-    elements.push(['img-25-left-text', '', id+1]);
-    // console.log(elements);
-});
-// Image placed on left (very small) with paragraph placed on right
-$('#img-vs-l').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- very small image left -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-2 border text-center">
-                    <div class="form-group">
-                        <label for="">Very Small Left image</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-                <div class="col-sm-10 border">
-                    <div class="form-group">
-                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                        <textarea class="form-control store-values" id="elementNo${elements.length+1}" rows="3"></textarea>
-                        <small class="form-text text-muted">Simple paragraph </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-
-    //in the end
-    elements.push(['img-vs-left-img','',id]);
-    elements.push(['img-vs-left-text', '', id+1]);
-    // console.log(elements);
-});
-
-// Image placed on right (50%) with paragraph placed on left
-$('#img-50-r').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- 50% image right -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-6 border">
-                    <div class="form-group">
-                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                        <textarea class="form-control store-values" id="elementNo${elements.length+1}" rows="3"></textarea>
-                        <small class="form-text text-muted">Simple paragraph </small>
-                    </div>
-                </div>
-                <div class="col-sm-6 border text-center">
-                    <div class="form-group">
-                        <label for="">Right Large image | width 50%</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-
-    //in the end
-    elements.push(['img-50-right-img','',id]);
-    elements.push(['img-50-right-text', '', id+1]);
-    // console.log(elements);
-});
-
-// Image placed on right (very small) with paragraph placed on left
-$('#img-vs-r').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- very small image right -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-10 border">
-                    <div class="form-group">
-                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                        <textarea class="form-control store-values" id="elementNo${elements.length+1}" rows="3"></textarea>
-                        <small class="form-text text-muted">Simple paragraph </small>
-                    </div>
-                </div>
-                <div class="col-sm-2 border text-center">
-                    <div class="form-group">
-                        <label for="">Very Small Right image</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement" id="del${elements.length}">Delete</button></div>
-    </div>`
-
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-
-    //in the end
-    elements.push(['img-vs-right-img','',id]);
-    elements.push(['img-vs-right-text', '', id+1]);
-    // console.log(elements);
-});
-
-// Image placed on right (25%) with paragraph placed on left
-$('#img-25-r').click(()=>{
-    let id = elements.length;
-    let template = `
-    <!-- 25% image right -->
-    <div class="row my-2">
-        <div class="col-sm-10">
-            <div class="row">
-                <div class="col-sm-8 border">
-                    <div class="form-group">
-                        <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-                        <textarea class="form-control store-values" id="elementNo${elements.length+1}" rows="3"></textarea>
-                        <small class="form-text text-muted">Simple paragraph </small>
-                    </div>
-                </div>
-                <div class="col-sm-4 border text-center">
-                    <div class="form-group">
-                        <label for="">Right Small image | width 25%</label>
-                        <input type="file" class="form-control-file imgInp" id="elementNo${elements.length}">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-sm-2"><button class="btn btn-primary deleteElement"  id="del${elements.length}">Delete</button></div>
-    </div>`
-
-
-    let new_element = document.createElement('div');
-    new_element.innerHTML = template;
-    document.getElementById('addHere').appendChild(new_element);
-
-    //in the end
-    elements.push(['img-25-right-img','',id]);
-    elements.push(['img-25-right-text', '', id+1]);
-    // console.log(elements);
-});
+blh.addEventListener('click', ()=>{
+    objs.push(new Templates('blh', objs.length, ['']));
+    updateEditor();
+})
+slh.addEventListener('click', ()=>{
+    objs.push(new Templates('slh', objs.length, ['']));
+    updateEditor();
+})
+sch.addEventListener('click', ()=>{
+    objs.push(new Templates('sch', objs.length, ['']));
+    updateEditor();
+})
+fci.addEventListener('click', ()=>{
+    objs.push(new Templates('fci', objs.length, ['']));
+    updateEditor();
+})
+cp.addEventListener('click', ()=>{
+    objs.push(new Templates('cp', objs.length, ['']));
+    updateEditor();
+})
+lpri.addEventListener('click', ()=>{
+    objs.push(new Templates('lpri', objs.length, ['', '']));
+    updateEditor();
+})
+lirp.addEventListener('click', ()=>{
+    objs.push(new Templates('lirp', objs.length, ['', '']));
+    updateEditor();
+})
+link.addEventListener('click', ()=>{
+    objs.push(new Templates('link', objs.length, ['', '']));
+    updateEditor();
+})
+// Python format equivalent in javascript
+String.prototype.format = function (){
+    var i = 0;
+    args = arguments;
+    return this.replace(/{}/g, function(){
+        return typeof args[i] != 'undefined' ? args[i++] : '';
+    });
+};
+function textAreaAdjust(element){
+    element.style.height = "1px";
+    element.style.height = (25+element.scrollHeight)+"px";
+}
